@@ -6,9 +6,21 @@ authors = [
     {name = "Anshil P", email = "contactme@anshil.me"},
 ]
 license = {text = "MIT"}
-dependencies = []
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.25.0",
+    "sqlalchemy>=2.0.25",
+    "psycopg2>=2.9.9",
+    "psycopg2-binary>=2.9.9",
+]
 requires-python = ">=3.11"
 
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
+
+[tool.pdm]
+
+[tool.pdm.scripts]
+dev = "uvicorn src.thecontacts.main:app --reload"
+start = "gunicorn -k uvicorn.workers.UvicornWorker src.theresumemanager.main:app --host 0.0.0.0"
